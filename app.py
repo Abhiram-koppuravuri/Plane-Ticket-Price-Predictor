@@ -368,13 +368,16 @@ def predict():
 
         output=round(prediction[0],2)
 
-        return render_template('home.html',prediction_text="Your Flight price is Rs. {}".format(output))
+        return render_template('home.html',prediction_text="Your Flight Ticket price is Rs. {}".format(output))
 
 
     return render_template("home.html")
 
 
 
+import os  # Import os module to access environment variables
+
+# Your existing imports and code...
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
