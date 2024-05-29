@@ -16,17 +16,26 @@
     <!-- JavaScript -->
     <script>
         function setMinMaxArrivalDate() {
-            const depTime = new Date(document.getElementById('Dep_Time').value);
-            if (!isNaN(depTime.getTime())) {
-                const maxArrivalTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
-                const maxHour = maxArrivalTime.getHours();
-                const maxMinute = maxArrivalTime.getMinutes();
-                // Format the maximum arrival time to include the time part
-                const maxArrivalTimeString = `${maxArrivalTime.toISOString().slice(0, 10)}T${maxHour < 10 ? '0' + maxHour : maxHour}:${maxMinute < 10 ? '0' + maxMinute : maxMinute}`;
-                document.getElementById('Arrival_Time').min = depTime.toISOString().slice(0, 16);
-                document.getElementById('Arrival_Time').max = maxArrivalTimeString;
-            }
-        }
+    const depTimeInput = document.getElementById('Dep_Time');
+    const depTime = new Date(depTimeInput.value);
+
+    if (!isNaN(depTime.getTime())) {
+        const minArrivalTime = new Date(depTime.getTime()); // Set minimum to departure time
+        const maxArrivalTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
+
+        // Format min/max times for the input fields (ensure leading zeros)
+        const formatTime = (date) => {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${date.toISOString().slice(0, 10)}T${hours}:${minutes}`;
+        };
+
+        depTimeInput.min = formatTime(minArrivalTime); 
+        document.getElementById('Arrival_Time').min = formatTime(minArrivalTime);
+        document.getElementById('Arrival_Time').max = formatTime(maxArrivalTime);
+    }
+}
+
 
         function updateDestinationOptions() {
             const sourceSelect = document.getElementById('Source');
@@ -38,14 +47,23 @@
 
             destinationSelect.innerHTML = ''; // Clear current options
 
-            options.forEach(option => {
-                if (option !== selectedSource) {
-                    const optionElement = document.createElement('option');
-                    optionElement.value = option;
-                    optionElement.text = option;
-                    destinationSelect.add(optionElement);
-                }
-            });
+// Add placeholder option
+const placeholderOption = document.createElement('option');
+placeholderOption.value = '';
+placeholderOption.text = 'Select an option';
+placeholderOption.disabled = true;
+placeholderOption.selected = true;
+destinationSelect.add(placeholderOption);
+
+options.forEach(option => {
+    if (option !== selectedSource) {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.text = option;
+        destinationSelect.add(optionElement);
+    }
+});
+
         }
     </script>
 </head>
