@@ -1,4 +1,4 @@
-# AirlanePricePredictor
+# Plane ticket price Predictor
 ## Data set link - https://www.kaggle.com/datasets/nikhilmittal/flight-fare-prediction-mh
 ## Web app Deployment link - https://plane-ticket-price-predictor.onrender.com/
 
@@ -7,7 +7,10 @@
 # Demonstration
 
 
-https://github.com/Abhiram-koppuravuri/plane-ticket-price-predictor/assets/121746477/21c4d0ce-27dc-4310-94bb-c0c7b8f33025
+
+
+https://github.com/Abhiram-koppuravuri/plane-ticket-price-predictor/assets/121746477/eb69e57a-29e7-4e48-b6cf-01cf5be307ff
+
 
 
 
